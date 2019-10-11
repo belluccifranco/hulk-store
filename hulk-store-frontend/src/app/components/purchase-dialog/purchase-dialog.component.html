@@ -1,0 +1,28 @@
+<mat-dialog-content class="app-purchase-dialog">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h3 class="error-message" *ngIf="showError">{{ errorMessage }}</h3>
+    <h2 class="title">{{ title }}</h2>
+  </div>
+  <span class="productId">#{{ product.productId }}</span>
+  <p class="description">{{ product.description }}</p>
+  <div fxLayoutAlign="center center">
+    <button mat-mini-fab color="primary" (click)="minusOne(amount)">
+      <mat-icon>remove</mat-icon>
+    </button>
+    <mat-form-field class="input-amount">
+      <label>
+        <input matInput autofocus type="number" [(ngModel)]='amount' placeholder="Amount" min="0">
+      </label>
+      <br>
+    </mat-form-field>
+    <button mat-mini-fab color="primary" (click)="plusOne(amount)">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <br>
+  <div fxLayout="column">
+    <button mat-raised-button color="primary" (click)="confirm()" [disabled]="amount <= 0">Buy!</button>
+  </div>
+</mat-dialog-content>
+
+

@@ -1,0 +1,29 @@
+<div class="app-products">
+  <span class="welcome-message" fxLayoutAlign="center center">Welcome to Hulk Store!</span>
+  <div class="image-cover" fxLayoutAlign="center center">
+    <img src="https://miro.medium.com/max/2538/1*sR7-iqYeA7Q4PsNzcOENKA.png" alt="">
+  </div>
+  <mat-nav-list class="products-nav-list" disableRipple="true">
+    <button mat-raised-button color="primary" (click)="showProductDialogForAddNew()">
+      <mat-icon>add_circle_outline</mat-icon>
+      Add new product
+    </button>
+    <div *ngFor="let product of products$ | async">
+      <mat-list-item>
+        <h1 matLine> #{{ product.productId }} </h1>
+        <span matLine class="description"> {{ product.description }} </span>
+        <span matLine> Amount: {{ product.amount }} </span>
+        <span matLine> Price {{ product.price | currency}} </span>
+        <button mat-icon-button color="primary" (click)="showPurchaseDialog(product)">
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="showProductDialogForEdit(product)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="delete(product)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </div>
+  </mat-nav-list>
+</div>

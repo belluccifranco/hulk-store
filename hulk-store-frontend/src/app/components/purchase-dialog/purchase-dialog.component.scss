@@ -1,0 +1,25 @@
+.app-purchase-dialog {
+  .error-message {
+    color: red;
+  }
+
+  .title {
+    color: #3f51b5;
+  }
+
+  span.productId {
+    font-weight: normal;
+    color: black;
+  }
+
+  p.description {
+    color: #3f51b5;
+    font-weight: bold;
+    margin-top: 0;
+  }
+
+  .input-amount {
+    width: 100px;
+    padding: 0 10px;
+  }
+}

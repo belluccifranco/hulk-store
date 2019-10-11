@@ -1,0 +1,29 @@
+.app-products {
+  height: 100%;
+  background-color: whitesmoke;
+
+  .welcome-message {
+    color: #3f51b5;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+
+  .image-cover {
+    display: inline-block;
+    img {
+      max-width: 100%;
+      height: auto;
+      display: inline-block;
+    }
+  }
+
+  .products-nav-list {
+    background-color: whitesmoke;
+  }
+
+  .description {
+    color: #3f51b5;
+    font-size: 1.1em;
+    font-weight: bolder;
+  }
+}

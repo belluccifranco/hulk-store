@@ -1,0 +1,41 @@
+<mat-dialog-content class="app-product">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <h3 class="error-message" *ngIf="showError">{{ errorMessage }}</h3>
+    <h2 class="title">{{ title }}</h2>
+    <form [formGroup]="productForm" (ngSubmit)="confirm()" fxLayout="column">
+      <div fxLayout="column" fxLayoutGap=".5rem">
+        <mat-form-field fxFlex>
+          <label>
+            <input matInput formControlName="description" placeholder="Description" required>
+          </label>
+          <mat-error *ngIf="productForm.get('description').hasError('required')">
+            Required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <label>
+            <input matInput formControlName="amount" placeholder="Amount" type="number" required>
+          </label>
+          <mat-error *ngIf="productForm.get('amount').hasError('required')">
+            Required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <label>
+            <input matInput formControlName="price" placeholder="Price" type="number" required>
+          </label>
+          <mat-error *ngIf="productForm.get('price').hasError('required')">
+            Required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <span><br></span>
+      <div>
+        <button fxFill mat-raised-button color="primary"
+                [disabled]="productForm.get('amount').value < 0 || productForm.get('price').value < 0">
+          {{ this.editMode ? 'Edit!' : 'Add!' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</mat-dialog-content>
