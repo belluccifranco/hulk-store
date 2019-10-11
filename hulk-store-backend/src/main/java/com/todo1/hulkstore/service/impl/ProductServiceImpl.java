@@ -28,6 +28,12 @@ public class ProductServiceImpl implements ProductService {
     this.productRepository = productRepository;
   }
 
+  /**
+   * Saves an entity Product with data from productDTO
+   *
+   * @param productDTO Data for the new Product
+   * @return The saved Product
+   */
   @Override
   public Product saveNew(@Valid ProductDTO productDTO) {
     Product product =
@@ -40,6 +46,12 @@ public class ProductServiceImpl implements ProductService {
     return this.productRepository.save(product);
   }
 
+  /**
+   * Subtract the required units of products. Check the availability (amount) of products before
+   * performing the operation
+   *
+   * @param purchaseProductDTO Data for the subtract operation
+   */
   @Override
   public synchronized void purchase(@Valid PurchaseProductDTO purchaseProductDTO) {
     Optional<Product> product = this.productRepository.findById(purchaseProductDTO.getProductId());
@@ -56,31 +68,51 @@ public class ProductServiceImpl implements ProductService {
     }
   }
 
+  /**
+   * Removes a product by id
+   *
+   * @param productId The product id to be removed
+   */
   @Override
   public void deleteOne(Long productId) {
     this.productRepository.deleteById(productId);
   }
 
+  /**
+   * Updates a product with data from productDTO
+   *
+   * @param productDTO Data for the update operation
+   * @return The updated product
+   */
   @Override
   public synchronized Product updateOne(@Valid ProductDTO productDTO) {
-    Optional<Product> product =
-        this.productRepository.findById(productDTO.getProductId());
+    Optional<Product> product = this.productRepository.findById(productDTO.getProductId());
     if (product.isPresent()) {
       product.get().setDescription(productDTO.getDescription());
       product.get().setAmount(productDTO.getAmount());
       product.get().setPrice(productDTO.getPrice());
       return this.productRepository.save(product.get());
     } else {
-      throw new BusinessServiceException(
-          "Product #" + productDTO.getProductId() + " not found :(");
+      throw new BusinessServiceException("Product #" + productDTO.getProductId() + " not found :(");
     }
   }
 
+  /**
+   * Returns all products
+   *
+   * @return A list of products
+   */
   @Override
   public List<Product> getAll() {
     return this.productRepository.findAll();
   }
 
+  /**
+   * Returns a product by id
+   *
+   * @param productId The product id
+   * @return The product found or null if doesn't exist
+   */
   @Override
   public Product getProductById(Long productId) {
     Optional<Product> product = this.productRepository.findById(productId);
